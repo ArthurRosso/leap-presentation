@@ -1,5 +1,5 @@
 // Initialize TouchFree
-// TouchFree.Init();
+TouchFree.Init();
 const canvas = document.getElementById("drawingCanvas");
 const ctx = canvas.getContext("2d");
 
