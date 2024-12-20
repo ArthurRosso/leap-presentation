@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Simple Drawing App</title>
+        <script
+            name="TouchFree_Tooling"
+            type="text/javascript"
+            src="TouchFree_Tooling.js"
+        ></script>
+        <style>
+            canvas {
+                border: 1px solid black;
+                cursor: crosshair;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Simple Drawing Canvas</h1>
+        <div style="display: flex">
+            <canvas id="drawingCanvas" width="800" height="600"></canvas>
+            <button id="startDrawingBtn">Start Drawing</button>
+        </div>
+        <br />
+        <button id="clearCanvas">Clear Canvas</button>
+
+        <script>
+            // Initialize TouchFree
+            TouchFree.Init();
+            const canvas = document.getElementById("drawingCanvas");
+            const ctx = canvas.getContext("2d");
+
+            let isDrawing = false;
+
+            // Function to get pointer coordinates relative to the canvas
+            const getPointerPosition = function (event) {
+                const rect = canvas.getBoundingClientRect(); // Get canvas position
+                return {
+                    x: event.clientX - rect.left,
+                    y: event.clientY - rect.top,
+                };
+            };
+
+            // Start drawing
+            var startDrawing = function (event) {
+                const pos = getPointerPosition(event); // Get pointer position
+                isDrawing = true;
+                ctx.beginPath();
+                ctx.moveTo(pos.x, pos.y); // Start drawing at pointer position
+            };
+
+            // Draw on the canvas
+            var drawOnCanvas = function (event) {
+                if (isDrawing) {
+                    const pos = getPointerPosition(event); // Get pointer position
+                    ctx.lineTo(pos.x, pos.y); // Draw to pointer position
+                    ctx.stroke();
+                }
+            };
+
+            // Stop drawing
+            var stopDrawing = function () {
+                isDrawing = false;
+            };
+
+            // Attach pointer events
+            canvas.addEventListener("pointerdown", startDrawing);
+            canvas.addEventListener("pointermove", drawOnCanvas);
+            canvas.addEventListener("pointerup", stopDrawing);
+
+            // Clear canvas
+            document
+                .getElementById("clearCanvas")
+                .addEventListener("click", () => {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                });
+
+            // Button to start drawing (trigger pointer event manually if needed)
+            document
+                .getElementById("startDrawingBtn")
+                .addEventListener("click", () => {
+                    alert("Use your hand gestures to start drawing!");
+                });
+        </script>
+    </body>
+</html>
