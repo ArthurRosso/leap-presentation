@@ -1,73 +1,46 @@
-// Initialize TouchFree
-TouchFree.Init();
-const canvas = document.getElementById("drawingCanvas");
-const ctx = canvas.getContext("2d");
-
-// Adjust canvas size to match the container
-canvas.width = canvas.offsetWidth;
-canvas.height = canvas.offsetHeight;
-
-let isDrawing = false;
-let lastX = 0;
-let lastY = 0;
-let currentColor = "black";
-
-// Drawing functions
-function setColor(color) {
-  currentColor = color;
-}
-
-// Enable pointer events on canvas for drawing
-canvas.style.pointerEvents = "auto";
-
-function startDrawing(event) {
-  isDrawing = true;
-  const { offsetX, offsetY } = getMousePosition(event);
-  [lastX, lastY] = [offsetX, offsetY];
-}
-
-function drawOnCanvas(event) {
-  if (!isDrawing) return;
-  const { offsetX, offsetY } = getMousePosition(event);
-  ctx.beginPath();
-  ctx.moveTo(lastX, lastY);
-  ctx.lineTo(offsetX, offsetY);
-  ctx.strokeStyle = currentColor; // Change color as needed
-  ctx.lineWidth = 2; // Change line width as needed
-  ctx.stroke();
-  [lastX, lastY] = [offsetX, offsetY];
-}
-
-function stopDrawing() {
-  isDrawing = false;
-  ctx.closePath();
-}
-
-// Clear canvas
-function clearCanvas() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-}
-
-// Button to start drawing (trigger pointer event manually if needed)
-function startDrawingBtn() {
-  alert("Use your hand gestures to start drawing!");
-}
-
-function getMousePosition(event) {
-  const rect = canvas.getBoundingClientRect();
-  return {
-    offsetX: event.clientX - rect.left,
-    offsetY: event.clientY - rect.top,
-  };
-}
-
-// Event listeners for mouse actions
-canvas.addEventListener("mousedown", startDrawing);
-canvas.addEventListener("mousemove", drawOnCanvas);
-canvas.addEventListener("mouseup", stopDrawing);
-canvas.addEventListener("mouseout", stopDrawing);
-
-// // Attach pointer events
-canvas.addEventListener("pointerdown", startDrawing);
-canvas.addEventListener("pointermove", drawOnCanvas);
-canvas.addEventListener("pointerup", stopDrawing);
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Leap Presentation</title>
+    <script
+      name="TouchFree_Tooling"
+      type="text/javascript"
+      src="TouchFree_Tooling.js"
+    ></script>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <div class="container">
+      <iframe id="pdfFrame" src="pres.pdf"></iframe>
+      <canvas id="drawingCanvas"></canvas>
+      <div id="controls">
+        <button
+          class="color-btn"
+          style="background: red"
+          onclick="setColor('red')"
+        ></button>
+        <button
+          class="color-btn"
+          style="background: blue"
+          onclick="setColor('blue')"
+        ></button>
+        <button
+          class="color-btn"
+          style="background: green"
+          onclick="setColor('green')"
+        ></button>
+        <button
+          class="color-btn"
+          style="background: black"
+          onclick="setColor('black')"
+        ></button>
+        <br />
+        <button id="startDrawingBtn">Start Drawing</button>
+        <button id="clearCanvas" onclick="clearCanvas()">Clear</button>
+      </div>
+    </div>
+    <script name="index" type="text/javascript" src="index.js"></script>
+  </body>
+</html>
