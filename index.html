@@ -1,46 +1,47 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Leap Presentation</title>
-    <script
-      name="TouchFree_Tooling"
-      type="text/javascript"
-      src="TouchFree_Tooling.js"
-    ></script>
-    <link rel="stylesheet" href="index.css" />
-  </head>
-  <body>
-    <div class="container">
-      <iframe id="pdfFrame" src="pres.pdf"></iframe>
-      <canvas id="drawingCanvas"></canvas>
-      <div id="controls">
-        <button
-          class="color-btn"
-          style="background: red"
-          onclick="setColor('red')"
-        ></button>
-        <button
-          class="color-btn"
-          style="background: blue"
-          onclick="setColor('blue')"
-        ></button>
-        <button
-          class="color-btn"
-          style="background: green"
-          onclick="setColor('green')"
-        ></button>
-        <button
-          class="color-btn"
-          style="background: black"
-          onclick="setColor('black')"
-        ></button>
-        <br />
-        <button id="startDrawingBtn">Start Drawing</button>
-        <button id="clearCanvas" onclick="clearCanvas()">Clear</button>
-      </div>
-    </div>
-    <script name="index" type="text/javascript" src="index.js"></script>
-  </body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Leap Presentation</title>
+        <script
+            name="TouchFree_Tooling"
+            type="text/javascript"
+            src="TouchFree_Tooling.js"
+        ></script>
+        <link rel="stylesheet" href="index.css" />
+    </head>
+    <body>
+        <div class="container">
+            <iframe id="pdfFrame" src="pres.pdf"></iframe>
+            <canvas id="drawingCanvas"></canvas>
+            <div id="controls">
+                <button
+                    class="color-btn"
+                    style="background: red"
+                    onclick="setColor('red')"
+                ></button>
+                <button
+                    class="color-btn"
+                    style="background: blue"
+                    onclick="setColor('blue')"
+                ></button>
+                <button
+                    class="color-btn"
+                    style="background: green"
+                    onclick="setColor('green')"
+                ></button>
+                <button
+                    class="color-btn"
+                    style="background: black"
+                    onclick="setColor('black')"
+                ></button>
+                <br />
+                <button onclick="startDrawingBtn">Start Drawing</button>
+                <button onclick="stopDrawingBtn">Stop Drawing</button>
+                <button onclick="clearCanvas()">Clear</button>
+            </div>
+        </div>
+        <script name="index" type="text/javascript" src="index.js"></script>
+    </body>
 </html>
